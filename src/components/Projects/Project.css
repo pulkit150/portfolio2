@@ -35,6 +35,7 @@
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
+    height: 233px;
   }
 
   .portfolio__mask {
@@ -46,6 +47,7 @@
     width: 100%;
     transition: 0.3s;
     opacity: 0;
+
   }
 
   .portfolio__card:hover .portfolio__mask {

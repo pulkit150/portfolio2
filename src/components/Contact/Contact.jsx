@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import './Contact.css'
-import { toast, ToastContainer } from 'react-toastify'
-import emailjs from '@emailjs/browser'
-import "react-toastify/dist/ReactToastify.css";
-import { section } from 'framer-motion/client'
+import React, { useState } from 'react';
+import './Contact.css';
+import { toast, ToastContainer } from 'react-toastify';
+import emailjs from '@emailjs/browser';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Contact = (props) => {
+const Contact = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
@@ -20,7 +19,7 @@ const Contact = (props) => {
 
         setLoading(true);
 
-        const data = {
+        const templateParams = {
             name,
             email,
             subject,
@@ -31,21 +30,27 @@ const Contact = (props) => {
             .send(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                data,
+                templateParams,
                 import.meta.env.VITE_EMAILJS_PUBLIC_API
             )
             .then(
                 (result) => {
+                    console.log("Email sent:", result.text);
                     setLoading(false);
-                    toast.success(`Successfully sent email.`);
+                    toast.success("Successfully sent email!");
+                    // Clear form after success
+                    setName("");
+                    setEmail("");
+                    setSubject("");
+                    setMessage("");
                 },
                 (error) => {
+                    console.error("Email failed:", error);
                     setLoading(false);
-                    console.log(error);
-                    toast.error(error.text);
+                    toast.error("Failed to send email. Please try again later.");
                 }
             );
-    }
+    };
 
     return (
         <section className="contact container section" id="contact">
@@ -59,7 +64,6 @@ const Contact = (props) => {
                     </p>
                 </div>
 
-
                 <form onSubmit={submitHandler} className="contact__form">
                     <div className="contact__form-group">
                         <div className="contact__form-div">
@@ -67,6 +71,7 @@ const Contact = (props) => {
                                 type="text"
                                 className="contact__form-input"
                                 placeholder="Insert your name"
+                                value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </div>
@@ -76,6 +81,7 @@ const Contact = (props) => {
                                 type="email"
                                 className="contact__form-input"
                                 placeholder="Insert your email"
+                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
@@ -86,18 +92,18 @@ const Contact = (props) => {
                             type="text"
                             className="contact__form-input"
                             placeholder="Insert your subject"
+                            value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                         />
                     </div>
 
                     <div className="contact__form-div contact__form-area">
                         <textarea
-                            name=""
-                            id=""
                             cols="30"
                             rows="10"
                             className="contact__form-input"
                             placeholder="Write your message"
+                            value={message}
                             onChange={(e) => setMessage(e.target.value)}
                         ></textarea>
                     </div>
@@ -106,11 +112,12 @@ const Contact = (props) => {
                         {loading ? "Sending..." : "Send Message"}
                     </button>
                 </form>
-
-
             </div>
-        </section>
-    )
-}
 
-export default Contact
+            {/* Toast container for toast messages */}
+            <ToastContainer position="top-right" autoClose={3000} />
+        </section>
+    );
+};
+
+export default Contact;

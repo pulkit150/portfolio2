@@ -13,10 +13,6 @@ const HomeSocials = () => {
                 <FaLinkedinIn />
             </a>
 
-            <a href='https://wwww.Instagram.com/Greg.Sithole' className='home__social-link' target='_blank' rel='noreferrer'>
-                <FaInstagram />
-            </a>
-
             <a href='https://codeforces.com/profile/pulkitgangil1504' className='home__social-link' target='__blank' rel='noreferrer'>
                 <SiCodeforces />
             </a>

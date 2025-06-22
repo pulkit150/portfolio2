@@ -2,6 +2,7 @@ import React from 'react'
 import './About.css'
 import Image from '../../assets/avatar-2.svg'
 import AboutBox from './AboutBox';
+import Resume from '../../assets/resume.pdf'
 
 const About = () => {
 
@@ -31,7 +32,6 @@ const About = () => {
                             remarkable together!
                         </p>
                         <ul className="about__list">
-                            <li>C</li>
                             <li>C++</li>
                             <li>HTML</li>
                             <li>CSS</li>
@@ -43,6 +43,7 @@ const About = () => {
                             <li>MongoDB</li>
                             <li>NodeJS</li>
                             <li>ExpressJS</li>
+                            <li>MySQL</li>
                         </ul>
                         <button className="btn" onClick={downloadResume}>Download CV</button>
                     </div>
